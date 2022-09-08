@@ -21,6 +21,12 @@ public interface QQService {
     QQQuery getSearch(PageHelp pageHelp);
 
     /**
+     * v2 搜索接口
+     * @param pageHelp
+     * @return
+     */
+    QQQuery getSearchV2(PageHelp pageHelp);
+    /**
      * 获取歌曲
      * @param mid
 

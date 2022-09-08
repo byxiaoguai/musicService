@@ -50,8 +50,8 @@ public class QQController {
     @GetMapping("/getQQSearch")
     public ResponseMessage getSearch(PageHelp pageHelp) throws Exception {
         ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
-            final QQQuery search = qqService.getSearch(pageHelp);
-            if (search == null || search.getTotal() == null || search.getSongList() == null) {
+            final QQQuery search = qqService.getSearchV2(pageHelp);
+            if (search == null  || search.getSongList() == null) {
                 responseMessage.setData(new HashMap<String, Object>() {{
                     put("total", null);
                     put("items", null);

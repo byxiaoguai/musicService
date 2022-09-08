@@ -2,6 +2,7 @@ package org.system.vip.service.impl;
 
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.URLUtil;
+import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -133,6 +134,7 @@ public class QQServiceImpl implements QQService {
 //        params.put("data", JSONObject.toJSONString(qqBean));
         final String s = URLUtil.buildQuery(params, null);
         String url = "https://shc.y.qq.com/soso/fcgi-bin/client_search_cp?" + URLUtil.encode(s);
+
         try {
             final String result = this.getHttpQQ(url);
             final JSONObject jsonObject = JSONObject.parseObject(result);
@@ -195,6 +197,88 @@ public class QQServiceImpl implements QQService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return null;
+    }
+
+    /**
+     * v2 搜索接口
+     *
+     * @param pageHelp
+     * @return
+     */
+    @Override
+    public QQQuery getSearchV2(PageHelp pageHelp) {
+        String url="https://u.y.qq.com/cgi-bin/musicu.fcg?_webcgikey=DoSearchForQQMusicDesktop&_=1662611047244";
+        String parm="{\"comm\":{\"g_tk\":1526340816,\"uin\":877059905,\"format\":\"json\",\"inCharset\":\"utf-8\",\"outCharset\":\"utf-8\",\"notice\":0,\"platform\":\"h5\",\"needNewCode\":1,\"ct\":23,\"cv\":0},\"req_0\":{\"method\":\"DoSearchForQQMusicDesktop\",\"module\":\"music.search.SearchCgiService\",\"param\":{\"remoteplace\":\"txt.mqq.all\",\"searchid\":\"57601039106917195\",\"search_type\":0,\"query\":\""+ pageHelp.getText()+"\",\"page_num\":"+pageHelp.getPageNo()+",\"num_per_page\":"+pageHelp.getPageSize()+"}}}";
+
+
+        try {
+            String result = HttpUtil.post(url, parm);
+             JSONObject jsonObject = JSONObject.parseObject(result);
+             JSONObject req_0 = jsonObject.getJSONObject("req_0");
+             JSONObject data = req_0.getJSONObject("data");
+            JSONObject body = data.getJSONObject("body");
+            JSONObject song = body.getJSONObject("song");
+             JSONArray list = song.getJSONArray("list");
+            List<JSONObject> jsonObjects = list.toJavaList(JSONObject.class);
+            List<Song> songs = new ArrayList<>();
+            for (JSONObject jo : jsonObjects) {
+
+                Song song1 = new Song();
+                song1.setId(jo.getString("mid"));
+                song1.setPic("https://y.gtimg.cn/music/photo_new/T002R300x300M000" + jo.getJSONObject("album").getString("mid") + ".jpg?max_age=2592000");
+                song1.setName(jo.getString("name"));
+                final JSONArray singer = jo.getJSONArray("singer");
+                List<String> singers = new ArrayList<>();
+                for (Object o1 : singer) {
+                    JSONObject jo1 = (JSONObject) o1;
+                    singers.add(jo1.getString("name"));
+                }
+                song1.setSinger(String.join(",", singers));
+
+                final JSONObject file = jo.getJSONObject("file");
+//                array( 'size_flac', 999, 'F000', 'flac' ),
+//                        array( 'size_320mp3', 320, 'M800', 'mp3' ),
+//                        array( 'size_192aac', 192, 'C600', 'm4a' ),
+//                        array( 'size_128mp3', 128, 'M500', 'mp3' ),
+//                        array( 'size_96aac', 96, 'C400', 'm4a' ),
+//                        array( 'size_48aac', 48, 'C200', 'm4a' ),
+//                        array( 'size_24aac', 24, 'C100', 'm4a' ),
+                if (file.getString("size_flac") != null) {
+                    song1.getKbpsList().add(new MusicCode("size_flac", "size_flac", "999", "flac"));
+                }
+                if (file.getString("size_320mp3") != null) {
+                    song1.getKbpsList().add(new MusicCode("size_320mp3", "size_320mp3", "320", "mp3"));
+                }
+                if (file.getString("size_192aac") != null) {
+                    song1.getKbpsList().add(new MusicCode("size_192aac", "size_192aac", "192", "m4a"));
+                }
+                if (file.getString("size_128mp3") != null) {
+                    song1.getKbpsList().add(new MusicCode("size_128mp3", "size_128mp3", "128", "mp3"));
+                }
+                if (file.getString("size_96aac") != null) {
+                    song1.getKbpsList().add(new MusicCode("size_96aac", "size_96aac", "96", "m4a"));
+                }
+                if (file.getString("size_48aac") != null) {
+                    song1.getKbpsList().add(new MusicCode("size_48aac", "size_48aac", "48", "m4a"));
+                }
+                if (file.getString("size_24aac") != null) {
+                    song1.getKbpsList().add(new MusicCode("size_24aac", "size_24aac", "24", "m4a"));
+                }
+                //song1.setKbpsList();
+
+
+                songs.add(song1);
+            }
+            QQQuery qqQuery = new QQQuery();
+            qqQuery.setSongList(songs);
+//            qqQuery.setTotal(data.getJSONObject("meta").getInteger("curpage"));
+            return qqQuery;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         return null;
     }
