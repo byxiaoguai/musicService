@@ -53,7 +53,7 @@ public class QQServiceImpl implements QQService {
         Map<String, String> headers = new HashMap<>();
 
         headers.put("Referer", "http://y.qq.com");
-        headers.put("Cookie", "RK=2GcF5J3AXX; ptcz=4dac932a1bc116909a3f21dbaf4e48cd4a58d03c98dfea2b8d4a05c8f1c1a811; pgv_pvid=1701829961; tvfe_boss_uuid=a7db3926309f5497; o_cookie=877059905; eas_sid=x166n6h0y8x9z6U6W6L8m1k3m7; _tc_unionid=2778b8a1-d0ae-4899-a7a4-f42be350758d; _clck=lcbuwf|1|f4h|0; ptui_loginuin=877059905; _qpsvr_localtk=0.16662679827317672; pgv_info=ssid=s5409357700; vversion_name=8.2.95; video_omgid=eed5907a0be95da7; _tucao_custom_info=TGg1U3F2czdFS1U5bjZBRm9aaWlPenREMzNlN0MyVDRrRThMb1l2OXVFZjNkUkY1RWIzVkhkOFVzVjBRNGoxa…At=1670383320; psrf_qqaccess_token=D31D1926810DD2242CFE49C28C468AD3; qm_keyst=Q_H_L_5x1wClFHmka_CBhv5iKhHNp06W-G5-UJXnR0Wh4p4AIS1lED3_e3kKQ; wxrefresh_token=; qqmusic_key=Q_H_L_5x1wClFHmka_CBhv5iKhHNp06W-G5-UJXnR0Wh4p4AIS1lED3_e3kKQ; qm_keyst=Q_H_L_5x1wClFHmka_CBhv5iKhHNp06W-G5-UJXnR0Wh4p4AIS1lED3_e3kKQ; uin=877059905; wxopenid=; psrf_qqopenid=0C6C678CBD44A7F48641D135AD3E3917; euin=NeSloe4qNKnk; wxunionid=; psrf_musickey_createtime=1662607320; psrf_qqunionid=4AF1CB565882B8632377891522BDA6D8; tmeLoginType=2");
+        headers.put("Cookie", "RK=2GcF5J3AXX; ptcz=4dac932a1bc116909a3f21dbaf4e48cd4a58d03c98dfea2b8d4a05c8f1c1a811; pgv_pvid=1701829961; tvfe_boss_uuid=a7db3926309f5497; o_cookie=877059905; eas_sid=x166n6h0y8x9z6U6W6L8m1k3m7; _tc_unionid=2778b8a1-d0ae-4899-a7a4-f42be350758d; _clck=3878074388|1|f5t|0; ptui_loginuin=877059905; fqm_pvqid=fd5a8dde-e46b-42a2-9076-0a58af2cd57d; psrf_access_token_expiresAt=1674975390; euin=NeSloe4qNKnk; tmeLoginType=2; ied_qq=o0877059905; fqm_sessionid=80334284-0677-4dd4-964b-ca8d4395d94c; pgv_info=ssid=s24789…yst=Q_H_L_5io_mS55v_jtGkAu0y6LL_ULOaQpY38coFhYTCJ7xEVhEnGPLq0A-Fw; wxunionid=; uin=877059905; qm_keyst=Q_H_L_5io_mS55v_jtGkAu0y6LL_ULOaQpY38coFhYTCJ7xEVhEnGPLq0A-Fw; wxopenid=; qqmusic_key=Q_H_L_5io_mS55v_jtGkAu0y6LL_ULOaQpY38coFhYTCJ7xEVhEnGPLq0A-Fw; psrf_qqrefresh_token=DAA9645A7F04E83B67CD866188DF7731; psrf_qqunionid=4AF1CB565882B8632377891522BDA6D8; psrf_musickey_createtime=1667199390; psrf_qqopenid=0C6C678CBD44A7F48641D135AD3E3917; psrf_qqaccess_token=E742AC63771C08742140504BD170B498; wxrefresh_token=");
         headers.put("User-Agent", "QQ%E9%9F%B3%E4%B9%90/54409 CFNetwork/901.1 Darwin/17.6.0 (x86_64)");
         headers.put("Accept", "*/*");
         headers.put("Accept-Language", "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4");
@@ -227,7 +227,7 @@ public class QQServiceImpl implements QQService {
 
                 Song song1 = new Song();
                 song1.setId(jo.getString("mid"));
-                song1.setPic("https://y.gtimg.cn/music/photo_new/T002R300x300M000" + jo.getJSONObject("album").getString("mid") + ".jpg?max_age=2592000");
+                song1.setPic("https://y.gtimg.cn/music/photo_new/T002R300x300M000" + jo.getJSONObject("album").getString("mid") + ".jpg");//?max_age=2592000
                 song1.setName(jo.getString("name"));
                 final JSONArray singer = jo.getJSONArray("singer");
                 List<String> singers = new ArrayList<>();
@@ -235,7 +235,11 @@ public class QQServiceImpl implements QQService {
                     JSONObject jo1 = (JSONObject) o1;
                     singers.add(jo1.getString("name"));
                 }
-                song1.setSinger(String.join(",", singers));
+                JSONObject album = jo.getJSONObject("album");
+                String name = album.getString("name");
+                singers.add("《"+name+"》");
+
+                song1.setSinger(String.join(" - ", singers));
 
                 final JSONObject file = jo.getJSONObject("file");
 //                array( 'size_flac', 999, 'F000', 'flac' ),
@@ -402,7 +406,7 @@ public class QQServiceImpl implements QQService {
         final String s = URLUtil.buildQuery(params, null);
 
 
-        String url = "https://u.y.qq.com/cgi-bin/musicu.fcg?" + URLUtil.encode(s);
+        String url = "https://u6.y.qq.com/cgi-bin/musicu.fcg?" + URLUtil.encode(s);
         try {
             final String httpQQ = this.getHttpQQ(url);
             Play play = new Play();

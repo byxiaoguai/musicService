@@ -1,14 +1,16 @@
 /**
-  * Copyright 2021 json.cn 
+  * Copyright 2022 json.cn 
   */
-package org.system.vip.entity.MiGu;
+package org.system.vip.entity.MiGu.query;
 import java.util.List;
 
-
 /**
- * 咪咕搜索结果
+ * Auto-generated: 2022-09-20 17:24:3
+ *
+ * @author json.cn (i@json.cn)
+ * @website http://www.json.cn/java2pojo/
  */
-public class Search {
+public class SongsData {
 
     private int total;
     private List<Items> items;

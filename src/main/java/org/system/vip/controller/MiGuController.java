@@ -47,43 +47,43 @@ public class MiGuController {
     @GetMapping("/getMiGuSearch")
     public ResponseMessage getSearch(PageHelp pageHelp) {
         ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
-        final MiGuQuery search = miGuService.getSearch(pageHelp);
-        if (search==null||search.getData() == null||search.getData().getItems()==null) {
-            responseMessage.setData(new HashMap<String, Object>(){{
-                 put("total",null);
-                 put("items",null);
-            }});
-            return responseMessage;
-        }
-        final List<Song> songs = search.getData().getItems().stream().map(items -> {
-            List<MiGuTypeEnum>miGuTypeEnums=new ArrayList<>();
-            Song song = new Song();
-            song.setId(items.getCopyrightId());
-            song.setName(items.getName());
-            song.setSinger(String.join(",", items.getSingers().stream().map(Singers::getName).collect(Collectors.toList())));
-            song.setPic(items.getLargePic() != null ? items.getLargePic() : items.getMediumPic() != null ? items.getMediumPic() : items.getSmallPic());
-
-            if (ObjectUtil.isNotEmpty(items.getBit24())) {
-                miGuTypeEnums.add(MiGuTypeEnum.BIT24);
-            }
-            if (ObjectUtil.isNotEmpty(items.getHq())) {
-                miGuTypeEnums.add(MiGuTypeEnum.HQ);
-            }
-            if (ObjectUtil.isNotEmpty(items.getFullSong())) {
-                miGuTypeEnums.add(MiGuTypeEnum.FULL_SONG);
-            }
-            if (ObjectUtil.isNotEmpty(items.getSq())) {
-                miGuTypeEnums.add(MiGuTypeEnum.SQ);
-            }
-            song.getKbpsList().addAll(MiGuTypeEnum.getFull(miGuTypeEnums));
-            return song;
-        }).collect(Collectors.toList());
-
-        Map<String, Object> params = new HashMap<>();
-
-        params.put("total", search.getData().getTotal());
-        params.put("items", songs);
-        responseMessage.setData(params);
+//        final MiGuQuery search = miGuService.getSearch(pageHelp);
+//        if (search==null||search.getData() == null||search.getData().getItems()==null) {
+//            responseMessage.setData(new HashMap<String, Object>(){{
+//                 put("total",null);
+//                 put("items",null);
+//            }});
+//            return responseMessage;
+//        }
+//        final List<Song> songs = search.getData().getItems().stream().map(items -> {
+//            List<MiGuTypeEnum>miGuTypeEnums=new ArrayList<>();
+//            Song song = new Song();
+//            song.setId(items.getCopyrightId());
+//            song.setName(items.getName());
+//            song.setSinger(String.join(",", items.getSingers().stream().map(Singers::getName).collect(Collectors.toList())));
+//            song.setPic(items.getLargePic() != null ? items.getLargePic() : items.getMediumPic() != null ? items.getMediumPic() : items.getSmallPic());
+//
+//            if (ObjectUtil.isNotEmpty(items.getBit24())) {
+//                miGuTypeEnums.add(MiGuTypeEnum.BIT24);
+//            }
+//            if (ObjectUtil.isNotEmpty(items.getHq())) {
+//                miGuTypeEnums.add(MiGuTypeEnum.HQ);
+//            }
+//            if (ObjectUtil.isNotEmpty(items.getFullSong())) {
+//                miGuTypeEnums.add(MiGuTypeEnum.FULL_SONG);
+//            }
+//            if (ObjectUtil.isNotEmpty(items.getSq())) {
+//                miGuTypeEnums.add(MiGuTypeEnum.SQ);
+//            }
+//            song.getKbpsList().addAll(MiGuTypeEnum.getFull(miGuTypeEnums));
+//            return song;
+//        }).collect(Collectors.toList());
+//
+//        Map<String, Object> params = new HashMap<>();
+//
+//        params.put("total", search.getData().getTotal());
+//        params.put("items", songs);
+//        responseMessage.setData(params);
         return responseMessage;
     }
 

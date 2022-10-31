@@ -10,6 +10,11 @@ import lombok.Data;
 @Data
 public class PageHelp {
 
+
+ /**
+  * 搜索类型
+  */
+ private String type;
  /**
   * 搜索关键词
   */
@@ -22,6 +27,8 @@ public class PageHelp {
   * 每页多少
   */
  private String pageSize="30";
+
+
 
  public PageHelp setText(String text) {
   this.text = text;

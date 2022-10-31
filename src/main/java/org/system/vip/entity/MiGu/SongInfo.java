@@ -16,7 +16,7 @@ public class SongInfo {
 
     private String songId;
     private String songName;
-    private List<Singers> singers;
+//    private List<Singers> singers;
     private List<Albums> albums;
     private String copyrightId;
     private String length;

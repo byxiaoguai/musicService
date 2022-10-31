@@ -4,6 +4,7 @@ package org.system.vip.service;
 
 import org.system.vip.dto.PageHelp;
 import org.system.vip.entity.MiGu.*;
+import org.system.vip.entity.MiGu.query.MiGuQuery;
 
 import java.util.List;
 

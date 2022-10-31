@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 import org.system.vip.common.RedisUtils;
 import org.system.vip.dto.PageHelp;
 import org.system.vip.entity.MiGu.*;
+import org.system.vip.entity.MiGu.query.MiGuQuery;
 import org.system.vip.service.MiGuService;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,16 +49,17 @@ public class MiGuServiceImpl implements MiGuService {
         headers.put("Accept", " application/json, text/plain, */*");
         headers.put("Accept-Encoding", " gzip, deflate, br");
         headers.put("Accept-Language", " zh-CN,zh;q=0.9");
-        headers.put("By", (String) redisUtils.get("migubycookie"));
+        headers.put("By", "620eeaccf0f03dc51ea5a9f1f3fb4360");
         headers.put("Connection", " keep-alive");
-        headers.put("Cookie", (String) redisUtils.get("migucookie"));
+        headers.put("Cookie", "migu_cookie_id=f070095d-5f88-4ef0-8daf-fcb8872998e5-n41663660289312; migu_cookie_id=f070095d-5f88-4ef0-8daf-fcb8872998e5-n41663660289312; mg_uem_user_id_3136357ddb6a49f5b317ca6254e7ea49=337ae53a-9461-4cda-8be2-b6fdaf42a007; cookieId=OjrWJA1tAXGjKCwLGN7a8OQl1EI54_P1663660295271; migu_music_msidn=vbxok1525yy7yxNvy7ycfQ%3D%3D; WT_FPC=id=21efe210eaf2ce22ac31663660290363:lv=1663666204925:ss=1663666204925; idmpauth=true@passport.migu.cn; SESSION=N2Y0YzVjMTEtYzY4Ni00NmVhLTg1OGUtMmY1MjAyYjI0NDQ0");
         headers.put("DNT", " 1");
         headers.put("Host", " m.music.migu.cn");
         headers.put("Referer", " https://m.music.migu.cn/v4/search");
         headers.put("Sec-Fetch-Dest", " empty");
         headers.put("Sec-Fetch-Mode", " cors");
         headers.put("Sec-Fetch-Site", " same-origin");
-        headers.put("User-Agent", "  Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 SE 2.X MetaSr 1.0");
+        headers.put("User-Agent", "  Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36");
+
         return headers;
     }
 
@@ -105,13 +108,13 @@ public class MiGuServiceImpl implements MiGuService {
      */
     @Override
     public MiGuQuery getSearch(PageHelp pageHelp) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new LinkedHashMap<>();
         params.put("text", pageHelp.getText());
         params.put("pageNo", pageHelp.getPageNo());
         params.put("pageSize", pageHelp.getPageSize());
 //        String url = "https://m.music.migu.cn/migumusic/h5/search/song?text=" + pageHelp.getText() + "&pageNo=" + pageHelp.getPageNo() + "&pageSize=" + pageHelp.getPageSize();
         final String s = URLUtil.buildQuery(params, null);
-        String url = "https://m.music.migu.cn/migumusic/h5/search/song?"+ URLUtil.encode(s);
+        String url = "https://m.music.migu.cn/migumusic/h5/search/all?"+ URLUtil.encode(s);
         try {
             final String result = getHttpMiGu(url);
             return JSONUtil.toBean(result, MiGuQuery.class);

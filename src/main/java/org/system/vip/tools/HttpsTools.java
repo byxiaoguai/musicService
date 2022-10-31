@@ -2,14 +2,18 @@ package org.system.vip.tools;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.Consts;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
+import org.apache.http.*;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.cookie.Cookie;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -19,7 +23,9 @@ import org.apache.http.protocol.HttpContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +92,115 @@ public class HttpsTools {
             List<NameValuePair> nvps = getNameValuePairArr(params);
             httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
         }
+        String result = httpClient.execute(httpPost, new BasicResponseHandler());
+        return result;
+    }
+
+    public String sendPostMapjz(String url, Map<String, Object> params) throws IOException {
+        HttpPost httpPost = new HttpPost(url);
+//        httpPost.setHeader(":authority", "hk.ourui.com");
+
+        httpPost.setHeader("Host", " webapi.jiazhengye.cn");
+        httpPost.setHeader("User-Agent", " Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0");
+        httpPost.setHeader("Accept", " application/json, text/plain, */*");
+        httpPost.setHeader("Accept-Language", " zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
+        httpPost.setHeader("Accept-Encoding", " gzip, deflate, br");
+        httpPost.setHeader("Content-Type", " application/x-www-form-urlencoded; charset=UTF-8");
+        httpPost.setHeader("token", " f723e63f0eb3dc0563503dd40bff7898");
+        httpPost.setHeader("Origin", "https://www.jiazhengye.cn");
+        httpPost.setHeader("Connection", "keep-alive");
+        httpPost.setHeader("Referer", " https://www.jiazhengye.cn/");
+        httpPost.setHeader("Sec-Fetch-Dest", " empty");
+        httpPost.setHeader("Sec-Fetch-Mode", " cors");
+        httpPost.setHeader("Sec-Fetch-Site", " same-site");
+        httpPost.setHeader("TE", " trailers");
+
+        //也可以设置超时时间
+//        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(5000).setConnectTimeout(10000) // 设置连接超时时间
+//                .setSocketTimeout(10000) // 设置读取超时时间
+//                .setExpectContinueEnabled(false).setProxy(new HttpHost("110.85.30.52", 4212, "http"))//设置代理IP、端口
+//                .setCircularRedirectsAllowed(true) // 允许多次重定向
+//                .build();
+//
+//        httpPost.setConfig(requestConfig);
+
+
+        if (params != null) {
+            List<NameValuePair> nvps = getNameValuePairArr(params);
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+        }
+
+
+        String result = httpClient.execute(httpPost, new BasicResponseHandler());
+        return result;
+    }
+
+
+    public String sendPostMapsfj(String url, Map<String, Object> params) throws IOException {
+        HttpPost httpPost = new HttpPost(url);
+
+
+        httpPost.setHeader("Host", "webapi.jiazhengye.cn");
+        httpPost.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0");
+        httpPost.setHeader("Accept", "application/json, text/plain, */*");
+        httpPost.setHeader("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
+        httpPost.setHeader("Accept-Encoding", " gzip, deflate, br");
+        httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        httpPost.setHeader("token", "f723e63f0eb3dc0563503dd40bff7898");
+
+        httpPost.setHeader("Origin", " https://www.jiazhengye.cn");
+        httpPost.setHeader("Connection", "keep-alive");
+        httpPost.setHeader("Referer", " https://www.jiazhengye.cn/");
+        httpPost.setHeader("Sec-Fetch-Dest", " empty");
+        httpPost.setHeader("Sec-Fetch-Mode", "cors");
+        httpPost.setHeader("Sec-Fetch-Site", " same-site");
+        httpPost.setHeader("TE", "trailers");
+        //也可以设置超时时间
+//        RequestConfig requestConfig = RequestConfig.custom().setConnectionRequestTimeout(5000).setConnectTimeout(10000) // 设置连接超时时间
+//                .setSocketTimeout(10000) // 设置读取超时时间
+//                .setExpectContinueEnabled(false).setProxy(new HttpHost("117.28.32.144", 4212, "http"))//设置代理IP、端口
+//                .setCircularRedirectsAllowed(true) // 允许多次重定向
+//                .build();
+//
+//        httpPost.setConfig(requestConfig);
+
+
+        if (params != null) {
+            List<NameValuePair> nvps = getNameValuePairArr(params);
+            httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+        }
+        String result = httpClient.execute(httpPost, new BasicResponseHandler());
+        return result;
+    }
+
+
+
+    public String sendPostMapUpload(String url, Map<String, Object> params, File file) throws IOException {
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setHeader("HOST", "upload.ctfile.com");
+        httpPost.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0");
+        httpPost.setHeader("Content-Type", "multipart/form-data");
+        httpPost.setHeader("Content-Disposition", "form-data;filesize="+params.get("filesize")+";name="+params.get("name"));
+//        if (params != null) {
+//            List<NameValuePair> nvps = getNameValuePairArr(params);
+//            httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+//        }
+
+        MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
+        //设置浏览器兼容模式
+        multipartEntityBuilder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+        //设置请求的编码格式
+        multipartEntityBuilder.setCharset(Consts.UTF_8);
+        multipartEntityBuilder.setContentType(ContentType.MULTIPART_FORM_DATA);
+
+        multipartEntityBuilder.addBinaryBody("file",file);
+//
+//        ContentType strContent = ContentType.create("text/plain", Charset.forName("UTF-8"));
+//        params.forEach((s, o) -> {
+//            multipartEntityBuilder.addTextBody(s,o,strContent);
+//        });
+
+        httpPost.setEntity(multipartEntityBuilder.build());
         String result = httpClient.execute(httpPost, new BasicResponseHandler());
         return result;
     }
@@ -387,6 +502,7 @@ public class HttpsTools {
         }
         return nvps;
     }
+
     private List<NameValuePair> getNameValuePairArr2(Map<String, String> parasMap) {
         List<NameValuePair> nvps = new ArrayList<>();
         for (Map.Entry<String, String> parasEntry : parasMap.entrySet()) {
@@ -406,8 +522,6 @@ public class HttpsTools {
         }
         return nvps;
     }
-
-
 
 
     /**

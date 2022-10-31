@@ -99,11 +99,11 @@ public class QQController {
         return responseMessage;
     }
 
-    @NoLog
-    @GetMapping("/testHttp")
-    public ResponseMessage getSong( String url) throws Exception {
-        ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
-        responseMessage.setData(qqService.testHttp(url));
-        return responseMessage;
-    }
+//    @NoLog
+//    @GetMapping("/testHttp")
+//    public ResponseMessage getSong( String url) throws Exception {
+//        ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
+//        responseMessage.setData(qqService.testHttp(url));
+//        return responseMessage;
+//    }
 }

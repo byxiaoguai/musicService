@@ -1,11 +1,13 @@
 /**
-  * Copyright 2021 json.cn 
+  * Copyright 2022 json.cn 
   */
-package org.system.vip.entity.MiGu;
+package org.system.vip.entity.MiGu.query;
+
+
 import java.util.List;
 
 /**
- * Auto-generated: 2021-12-25 18:49:3
+ * Auto-generated: 2022-09-20 17:24:3
  *
  * @author json.cn (i@json.cn)
  * @website http://www.json.cn/java2pojo/
@@ -16,9 +18,9 @@ public class Items {
     private String name;
     private String copyrightId;
     private List<Singers> singers;
-    private String album;
+    private Album album;
     private String mv;
-    private Crbt crbt;
+    private String crbt;
     private Ring ring;
     private FullSong fullSong;
     private WalkMan walkMan;
@@ -59,10 +61,10 @@ public class Items {
          return singers;
      }
 
-    public void setAlbum(String album) {
+    public void setAlbum(Album album) {
          this.album = album;
      }
-     public String getAlbum() {
+     public Album getAlbum() {
          return album;
      }
 
@@ -73,10 +75,10 @@ public class Items {
          return mv;
      }
 
-    public void setCrbt(Crbt crbt) {
+    public void setCrbt(String crbt) {
          this.crbt = crbt;
      }
-     public Crbt getCrbt() {
+     public String getCrbt() {
          return crbt;
      }
 

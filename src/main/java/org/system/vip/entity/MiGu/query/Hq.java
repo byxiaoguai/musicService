@@ -1,15 +1,15 @@
 /**
-  * Copyright 2021 json.cn 
+  * Copyright 2022 json.cn 
   */
-package org.system.vip.entity.MiGu;
+package org.system.vip.entity.MiGu.query;
 
 /**
- * Auto-generated: 2021-12-25 18:49:3
+ * Auto-generated: 2022-09-20 17:24:3
  *
  * @author json.cn (i@json.cn)
  * @website http://www.json.cn/java2pojo/
  */
-public class WalkMan {
+public class Hq {
 
     private String name;
     private String copyrightId;
