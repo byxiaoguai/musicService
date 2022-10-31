@@ -3,7 +3,6 @@ package org.system.vip.controller;
 import cn.hutool.core.util.ObjectUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.system.vip.common.MiGuTypeEnum;
 import org.system.vip.common.NoLog;
@@ -12,7 +11,8 @@ import org.system.vip.common.ResponseMessage;
 import org.system.vip.dto.PageHelp;
 import org.system.vip.dto.Play;
 import org.system.vip.dto.Song;
-import org.system.vip.entity.MiGu.*;
+import org.system.vip.entity.MiGu.MiGuLyric;
+import org.system.vip.entity.MiGu.MiGuSong;
 import org.system.vip.entity.MiGu.query.MiGuQuery;
 import org.system.vip.entity.MiGu.query.Singers;
 import org.system.vip.entity.QQ.QQQuery;
@@ -48,7 +48,7 @@ public class MusicController {
      * @throws Exception
      */
     @NoLog
-    @GetMapping("/v1/getSearch")
+    @GetMapping("/api/v1/getSearch")
     public ResponseMessage getSearch(PageHelp pageHelp) throws Exception {
         ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
         if (pageHelp.getType() != null) {
@@ -127,7 +127,7 @@ public class MusicController {
      * @return
      */
     @NoLog
-    @GetMapping("/v1/getLyric")
+    @GetMapping("/api/v1/getLyric")
     public ResponseMessage getLyric(String id,String type) {
         ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
         if (type != null) {
@@ -159,7 +159,7 @@ public class MusicController {
      * @return
      */
     @NoLog
-    @GetMapping("/v1/getSong")
+    @GetMapping("/api/v1/getSong")
     public ResponseMessage getSong(String type,String id,  String code) {
         ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
         if (type != null) {
