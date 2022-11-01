@@ -209,8 +209,11 @@ public class QQServiceImpl implements QQService {
      */
     @Override
     public QQQuery getSearchV2(PageHelp pageHelp) {
-        String url="https://u.y.qq.com/cgi-bin/musicu.fcg?_webcgikey=DoSearchForQQMusicDesktop&_=1662611047244";
-        String parm="{\"comm\":{\"g_tk\":1526340816,\"uin\":0,\"format\":\"json\",\"inCharset\":\"utf-8\",\"outCharset\":\"utf-8\",\"notice\":0,\"platform\":\"h5\",\"needNewCode\":1,\"ct\":23,\"cv\":0},\"req_0\":{\"method\":\"DoSearchForQQMusicDesktop\",\"module\":\"music.search.SearchCgiService\",\"param\":{\"remoteplace\":\"txt.mqq.all\",\"searchid\":\"57601039106917195\",\"search_type\":0,\"query\":\""+ pageHelp.getText()+"\",\"page_num\":"+pageHelp.getPageNo()+",\"num_per_page\":"+pageHelp.getPageSize()+"}}}";
+        String url="https://u.y.qq.com/cgi-bin/musicu.fcg?_webcgikey=DoSearchForQQMusicDesktop&_="+System.currentTimeMillis();
+        int max = 999999999, min = 100000000;
+        long randomNum = System.currentTimeMillis();
+        int ran3 = (int) (randomNum % (max - min) + min);
+        String parm="{\"comm\":{\"g_tk\":"+ran3+",\"uin\":0,\"format\":\"json\",\"inCharset\":\"utf-8\",\"outCharset\":\"utf-8\",\"notice\":0,\"platform\":\"h5\",\"needNewCode\":1,\"ct\":23,\"cv\":0},\"req_0\":{\"method\":\"DoSearchForQQMusicDesktop\",\"module\":\"music.search.SearchCgiService\",\"param\":{\"remoteplace\":\"txt.mqq.all\",\"searchid\":\""+System.currentTimeMillis()+"\",\"search_type\":0,\"query\":\""+ pageHelp.getText()+"\",\"page_num\":"+pageHelp.getPageNo()+",\"num_per_page\":"+pageHelp.getPageSize()+"}}}";
 
 
         try {

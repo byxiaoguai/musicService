@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 /**
  * 音乐接口
+ *
  * @author lz
  * @date 2022/9/20 15:57
  */
@@ -43,6 +44,7 @@ public class MusicController {
 
     /**
      * 音乐搜索
+     *
      * @param pageHelp
      * @return
      * @throws Exception
@@ -56,7 +58,7 @@ public class MusicController {
             switch (pageHelp.getType()) {
                 case "1": //qq音乐
                     final QQQuery search = qqService.getSearchV2(pageHelp);
-                    if (search == null  || search.getSongList() == null) {
+                    if (search == null || search.getSongList() == null) {
                         responseMessage.setData(new HashMap<String, Object>() {{
                             put("total", null);
                             put("items", null);
@@ -71,15 +73,15 @@ public class MusicController {
                     break;
                 case "2": //咪咕音乐
                     final MiGuQuery miGuQuery = miGuService.getSearch(pageHelp);
-                    if (miGuQuery==null||miGuQuery.getData() == null) {
-                        responseMessage.setData(new HashMap<String, Object>(){{
-                            put("total",null);
-                            put("items",null);
+                    if (miGuQuery == null || miGuQuery.getData() == null) {
+                        responseMessage.setData(new HashMap<String, Object>() {{
+                            put("total", null);
+                            put("items", null);
                         }});
                         return responseMessage;
                     }
                     final List<Song> songs = miGuQuery.getData().getSongsData().getItems().stream().map(items -> {
-                        List<MiGuTypeEnum>miGuTypeEnums=new ArrayList<>();
+                        List<MiGuTypeEnum> miGuTypeEnums = new ArrayList<>();
                         Song song = new Song();
                         song.setId(items.getCopyrightId());
                         song.setName(items.getName());
@@ -113,9 +115,6 @@ public class MusicController {
         }
 
 
-
-
-
         return responseMessage;
     }
 
@@ -128,7 +127,7 @@ public class MusicController {
      */
     @NoLog
     @GetMapping("/api/v1/getLyric")
-    public ResponseMessage getLyric(String id,String type) {
+    public ResponseMessage getLyric(String id, String type) {
         ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
         if (type != null) {
             switch (type) {
@@ -160,7 +159,7 @@ public class MusicController {
      */
     @NoLog
     @GetMapping("/api/v1/getSong")
-    public ResponseMessage getSong(String type,String id,  String code) {
+    public ResponseMessage getSong(String type, String id, String code) {
         ResponseMessage responseMessage = new ResponseMessage(ResponseEnum.REQUEST_SUCCESS);
         if (type != null) {
             switch (type) {
@@ -170,7 +169,8 @@ public class MusicController {
                     break;
                 case "2":
                     Play play1 = new Play();
-                    final MiGuSong song = miGuService.getSong(id, code);
+
+                    final MiGuSong song = miGuService.getSong(id, MiGuTypeEnum.getType(code));
                     play1.setUrl(song.getData().getPlayUrl());
                     responseMessage.setData(play1);
                     break;

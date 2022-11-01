@@ -1,6 +1,8 @@
 package org.system.vip.common;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -62,6 +64,15 @@ public enum MiGuTypeEnum {
        return miGuTypeEnums.stream().map(miGuTypeEnum -> {
             return new MusicCode(miGuTypeEnum.getCode(), miGuTypeEnum.getType(),miGuTypeEnum.getKbps(), miGuTypeEnum.getSuffix());
         }).collect(Collectors.toList());
+    }
+
+    public static String getType(String code){
+        final Optional<MiGuTypeEnum> first = Arrays.stream(values()).filter(miGuTypeEnum -> miGuTypeEnum.code.equals(code)).findFirst();
+        if (first.isPresent()) {
+            return first.get().type;
+        }else {
+            return "1";
+        }
     }
 
     public String getCode() {

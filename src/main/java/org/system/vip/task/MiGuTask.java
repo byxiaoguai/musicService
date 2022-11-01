@@ -39,7 +39,7 @@ public class MiGuTask {
      */
     @Scheduled(cron = "0 0/10 * * * ?")
     public void heartbeat() {
-        MiGuSong song = miGuService.getSong("60054704083", "1");
+        MiGuSong song = miGuService.getSong("60054701912", "1");
         log.info("咪咕心跳时间:" + DateTime.now().toMsStr() + ":" + song);
     }
 
@@ -69,7 +69,7 @@ public class MiGuTask {
 //        redisUtils.set("port",data.getPort(),0);
       //  log.info("定时更换代理IP:" +data+"时间:" + DateTime.now().toMsStr());
 
-        redisUtils.set("load", !(boolean) redisUtils.get("load"), 0);
+//        redisUtils.set("load", !(boolean) redisUtils.get("load"), 0);
         log.info("定时更换接口时间:" + DateTime.now().toMsStr());
     }
 }

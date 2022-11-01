@@ -49,16 +49,16 @@ public class MiGuServiceImpl implements MiGuService {
         headers.put("Accept", " application/json, text/plain, */*");
         headers.put("Accept-Encoding", " gzip, deflate, br");
         headers.put("Accept-Language", " zh-CN,zh;q=0.9");
-        headers.put("By", "28709d851045010ad3c7195732d79d9c");
+        headers.put("By", "0a7ffa452096d330934052105a67794a");
         headers.put("Connection", " keep-alive");
-        headers.put("Cookie", "migu_cookie_id=25552756-c426-4760-92db-5fe098c9a7ff; mg_uem_user_id_3136357ddb6a49f5b317ca6254e7ea49=5596e9b9-10a5-459e-af49-eb119d803681; cookieId=Ncq3rLok-VFgsvrjAAZGhaGRYeJZ6UL1667291185595; idmpauth=true@passport.migu.cn; migu_music_msidn=vbxok1525yy7yxNvy7ycfQ%3D%3D; SESSION=NTAwYzMxMWItNDE4Zi00ZWE0LTg1ZjMtNzEyMWY5NjkwN2M0; mgAppH5CookieId=2820367676-0qok6ycb7f258a7285d48f78e43769-1667292730");
+        headers.put("Cookie", "migu_cookie_id=b241a219-943e-4d79-a190-0494b7ec0790; mg_uem_user_id_3136357ddb6a49f5b317ca6254e7ea49=7af73072-78f2-42cb-ae8c-a60c96c05d8d; cookieId=jnOuLWwHrmeVQVJxFSld_dJFuWYfeAf1667301248640; idmpauth=true@passport.migu.cn; migu_music_msidn=vbxok1525yy7yxNvy7ycfQ%3D%3D; SESSION=NjI0NGU4YzUtYjhlNi00NTI1LWE4MDItOGI4YzI0NDBlMGE2");
         headers.put("DNT", " 1");
         headers.put("Host", " m.music.migu.cn");
         headers.put("Referer", " https://m.music.migu.cn/v4/search");
         headers.put("Sec-Fetch-Dest", " empty");
         headers.put("Sec-Fetch-Mode", " cors");
         headers.put("Sec-Fetch-Site", " same-origin");
-        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0");
+        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 SE 2.X MetaSr 1.0");
 
         return headers;
     }
