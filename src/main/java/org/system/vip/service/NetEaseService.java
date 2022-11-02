@@ -15,7 +15,7 @@ public interface NetEaseService {
      * 获取音乐
      * @param pageHelp
      */
-    void getSearch(PageHelp pageHelp);
+    void getSearch(PageHelp pageHelp)throws Exception;
 
 
     /**
@@ -23,12 +23,12 @@ public interface NetEaseService {
      * @param id
 
      */
-    String getSong(String id);
+    String getSong(String id,String code)throws Exception;
 
     /**
      * 获取歌词
      * @param id 歌曲id
      *
      */
-    String getLyric(String id);
+    String getLyric(String id)throws Exception;
 }

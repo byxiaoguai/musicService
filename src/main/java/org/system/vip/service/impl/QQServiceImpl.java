@@ -5,17 +5,14 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-
 import org.apache.http.Consts;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.system.vip.common.MusicCode;
-import org.system.vip.common.RedisUtils;
 import org.system.vip.dto.PageHelp;
 import org.system.vip.dto.Play;
 import org.system.vip.dto.Song;
@@ -40,8 +37,7 @@ public class QQServiceImpl implements QQService {
 
     @Resource(name = "httpClientFactoryBean")
     private CloseableHttpClient httpClient;
-    @Autowired
-    private RedisUtils redisUtils;
+
 
     /**
      * QQ
@@ -53,7 +49,7 @@ public class QQServiceImpl implements QQService {
         Map<String, String> headers = new HashMap<>();
 
         headers.put("Referer", "http://y.qq.com");
-        headers.put("Cookie", "RK=2GcF5J3AXX; ptcz=4dac932a1bc116909a3f21dbaf4e48cd4a58d03c98dfea2b8d4a05c8f1c1a811; pgv_pvid=1701829961; tvfe_boss_uuid=a7db3926309f5497; o_cookie=877059905; eas_sid=x166n6h0y8x9z6U6W6L8m1k3m7; _tc_unionid=2778b8a1-d0ae-4899-a7a4-f42be350758d; _clck=3878074388|1|f5t|0; ptui_loginuin=877059905; fqm_pvqid=fd5a8dde-e46b-42a2-9076-0a58af2cd57d; psrf_access_token_expiresAt=1675068964; euin=NeSloe4qNKnk; tmeLoginType=2; ied_qq=o0877059905; ts_uid=3774873147; fqm_sessionid=7264f571-d935-4bb2-98a8-192a5c0e7d52; p…nid=; qqmusic_key=Q_H_L_53T05wRqLbvAuxN4dk-WHSF3apckPZJZaCgZ0OjjakpEgkDwEBZ-IKQ; psrf_qqaccess_token=E742AC63771C08742140504BD170B498; psrf_qqunionid=4AF1CB565882B8632377891522BDA6D8; qm_keyst=Q_H_L_53T05wRqLbvAuxN4dk-WHSF3apckPZJZaCgZ0OjjakpEgkDwEBZ-IKQ; wxrefresh_token=; psrf_qqopenid=0C6C678CBD44A7F48641D135AD3E3917; psrf_qqrefresh_token=DAA9645A7F04E83B67CD866188DF7731; wxunionid=; qm_keyst=Q_H_L_53T05wRqLbvAuxN4dk-WHSF3apckPZJZaCgZ0OjjakpEgkDwEBZ-IKQ; psrf_musickey_createtime=1667292964; uin=877059905");
+        headers.put("Cookie", "RK=GPdN4J3wTV; ptcz=f27cb5ac743f28f4ef74afda48a5302cc855eaaa107f19807699e779dd491f15; tvfe_boss_uuid=86e9595faa12dc30; pgv_pvid=3799308670; fqm_pvqid=418f8341-f97f-4d89-8aed-b99dc76cb91d; ts_refer=i.y.qq.com\\u002F; ts_uid=2088018298; eas_sid=v1y69654O2J787i8A7X9h4k8B3; _clck=3878074388|1|f5u|0; uin_cookie=o0877059905; ied_qq=o0877059905; pac_uid=0_bf23d64c32c3c; iip=0; o_cookie=877059905; fqm_sessionid=67e9b17e-03ed-4d3f-967b-44a80d0693e3; pgv_info=ssid=s9150388442; _qpsvr_localtk=0.13513843208219778; login_type=2; psrf_qqunionid=4AF1CB565882B8632377891522BDA6D8; wxrefresh_token=; euin=NeSloe4qNKnk; tmeLoginType=2; wxopenid=; psrf_qqrefresh_token=DAA9645A7F04E83B67CD866188DF7731; psrf_qqaccess_token=E742AC63771C08742140504BD170B498; psrf_access_token_expiresAt=1675164221; qm_keyst=Q_H_L_57Qlkgq7bPnaCkKFeDmxXbbryqjLxfSPh8NEm5TlXP4f3usUUjxMrJQ; qm_keyst=Q_H_L_57Qlkgq7bPnaCkKFeDmxXbbryqjLxfSPh8NEm5TlXP4f3usUUjxMrJQ; wxunionid=; psrf_qqopenid=0C6C678CBD44A7F48641D135AD3E3917; psrf_musickey_createtime=1667388221; qqmusic_key=Q_H_L_57Qlkgq7bPnaCkKFeDmxXbbryqjLxfSPh8NEm5TlXP4f3usUUjxMrJQ; uin=877059905; ts_last=y.qq.com\\u002Fn\\u002Fryqq\\u002Fplayer; ts_last=i.y.qq.com\\u002Fv8\\u002Fplaysong.html; ts_refer=ADTAGryqq.songDetail; ts_uid=2088018298");
         headers.put("User-Agent", "QQ%E9%9F%B3%E4%B9%90/54409 CFNetwork/901.1 Darwin/17.6.0 (x86_64)");
         headers.put("Accept", "*/*");
         headers.put("Accept-Language", "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4");
@@ -341,6 +337,8 @@ public class QQServiceImpl implements QQService {
         Req_0 req_0 = new Req_0();
         req_0.setMethod("CgiGetVkey");
         req_0.setModule("vkey.GetVkeyServer");
+//        req_0.setMethod("GetCdnDispatch");
+//        req_0.setModule("CDN.SrfCdnDispatchServer");
 
         Param param = new Param();
         param.setGuid(guid + "");
@@ -409,7 +407,6 @@ public class QQServiceImpl implements QQService {
         params.put("data", JSONObject.toJSONString(qqBean));
         final String s = URLUtil.buildQuery(params, null);
 
-
         String url = "https://u6.y.qq.com/cgi-bin/musicu.fcg?" + URLUtil.encode(s);
         try {
             final String httpQQ = this.getHttpQQ(url);
@@ -421,7 +418,7 @@ public class QQServiceImpl implements QQService {
             final JSONArray midurlinfo = data1.getJSONArray("midurlinfo");
             final JSONObject jsonObject1 = midurlinfo.getJSONObject(0);
 
-            play.setUrl(URLUtil.decode("http://ws.stream.qqmusic.qq.com/" + jsonObject1.getString("purl")));
+            play.setUrl(URLUtil.decode("https://aqqmusic.tc.qq.com/amobile.music.tc.qq.com/" + jsonObject1.getString("purl")));
 
             return play;
         } catch (Exception e) {

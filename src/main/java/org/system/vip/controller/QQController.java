@@ -1,25 +1,16 @@
 package org.system.vip.controller;
 
-import cn.hutool.core.util.URLUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.system.vip.common.NoLog;
-import org.system.vip.common.RedisUtils;
 import org.system.vip.common.ResponseEnum;
 import org.system.vip.common.ResponseMessage;
 import org.system.vip.dto.PageHelp;
 import org.system.vip.dto.Play;
 import org.system.vip.entity.QQ.QQQuery;
 import org.system.vip.service.QQService;
-import org.system.vip.tools.HttpsTools;
-
 
 import java.util.HashMap;
 import java.util.Map;

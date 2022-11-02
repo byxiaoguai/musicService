@@ -1,11 +1,9 @@
 package org.system.vip.task;
 
 import cn.hutool.core.date.DateTime;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.system.vip.common.RedisUtils;
 import org.system.vip.dto.Play;
 import org.system.vip.entity.MiGu.MiGuSong;
 import org.system.vip.service.MiGuService;
@@ -31,8 +29,7 @@ public class MiGuTask {
     private QQService qqService;
     @Resource
     private HttpsTools httpsTools;
-    @Resource
-    private RedisUtils redisUtils;
+
 
     /**
      * 咪咕音乐心跳
