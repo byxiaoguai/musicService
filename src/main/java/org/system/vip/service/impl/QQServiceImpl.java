@@ -3,7 +3,6 @@ package org.system.vip.service.impl;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.http.HttpUtil;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.Consts;
@@ -50,7 +49,7 @@ public class QQServiceImpl implements QQService {
         Map<String, String> headers = new HashMap<>();
 
         headers.put("Referer", "http://y.qq.com");
-        headers.put("Cookie", "RK=GPdN4J3wTV; ptcz=f27cb5ac743f28f4ef74afda48a5302cc855eaaa107f19807699e779dd491f15; tvfe_boss_uuid=86e9595faa12dc30; pgv_pvid=3799308670; fqm_pvqid=418f8341-f97f-4d89-8aed-b99dc76cb91d; ts_refer=i.y.qq.com\\u002F; ts_uid=2088018298; eas_sid=v1y69654O2J787i8A7X9h4k8B3; _clck=3878074388|1|f5u|0; uin_cookie=o0877059905; ied_qq=o0877059905; pac_uid=0_bf23d64c32c3c; iip=0; o_cookie=877059905; fqm_sessionid=67e9b17e-03ed-4d3f-967b-44a80d0693e3; pgv_info=ssid=s9150388442; _qpsvr_localtk=0.13513843208219778; login_type=2; psrf_qqunionid=4AF1CB565882B8632377891522BDA6D8; wxrefresh_token=; euin=NeSloe4qNKnk; tmeLoginType=2; wxopenid=; psrf_qqrefresh_token=DAA9645A7F04E83B67CD866188DF7731; psrf_qqaccess_token=E742AC63771C08742140504BD170B498; psrf_access_token_expiresAt=1675164221; qm_keyst=Q_H_L_57Qlkgq7bPnaCkKFeDmxXbbryqjLxfSPh8NEm5TlXP4f3usUUjxMrJQ; qm_keyst=Q_H_L_57Qlkgq7bPnaCkKFeDmxXbbryqjLxfSPh8NEm5TlXP4f3usUUjxMrJQ; wxunionid=; psrf_qqopenid=0C6C678CBD44A7F48641D135AD3E3917; psrf_musickey_createtime=1667388221; qqmusic_key=Q_H_L_57Qlkgq7bPnaCkKFeDmxXbbryqjLxfSPh8NEm5TlXP4f3usUUjxMrJQ; uin=877059905; ts_last=y.qq.com\\u002Fn\\u002Fryqq\\u002Fplayer; ts_last=i.y.qq.com\\u002Fv8\\u002Fplaysong.html; ts_refer=ADTAGryqq.songDetail; ts_uid=2088018298");
+        headers.put("Cookie", "pgv_pvid=6108826112; fqm_pvqid=e2e6eed8-1b28-4c9c-a32c-e7396a04869f; fqm_sessionid=40321b16-0d58-4a4f-abca-600eb502cd58; pgv_info=ssid=s4397433020; ts_last=y.qq.com/; ts_uid=6613062264; _qpsvr_localtk=0.16629067549285392; RK=FHdNpp3AHX; ptcz=d6e8f3f565c4afcbb3bc8c39256f8f7a24e98b740205ad10e3f13e36b28d5fd4; login_type=1; psrf_access_token_expiresAt=1675259614; qm_keyst=Q_H_L_5jpAUDLqwBQpp3aqDLKoJCqiMe_nMzamDScXw9iB4kTmsIOCjIpKS_A; psrf_qqaccess_token=E742AC63771C08742140504BD170B498; psrf_musickey_createtime=1667483614; psrf_qqopenid=0C6C678CBD44A7F48641D135AD3E3917; psrf_qqrefresh_token=DAA9645A7F04E83B67CD866188DF7731; uin=877059905; tmeLoginType=2; euin=NeSloe4qNKnk; wxunionid=; qqmusic_key=Q_H_L_5jpAUDLqwBQpp3aqDLKoJCqiMe_nMzamDScXw9iB4kTmsIOCjIpKS_A; wxopenid=; qm_keyst=Q_H_L_5jpAUDLqwBQpp3aqDLKoJCqiMe_nMzamDScXw9iB4kTmsIOCjIpKS_A; psrf_qqunionid=4AF1CB565882B8632377891522BDA6D8; wxrefresh_token=");
         headers.put("User-Agent", "QQ%E9%9F%B3%E4%B9%90/54409 CFNetwork/901.1 Darwin/17.6.0 (x86_64)");
         headers.put("Accept", "*/*");
         headers.put("Accept-Language", "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4");
