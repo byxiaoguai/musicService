@@ -23,7 +23,6 @@ import java.util.Map;
 @Service
 public class NetEaseServiceImpl implements NetEaseService {
 
-
     @Resource(name = "httpClientFactoryBean")
     private CloseableHttpClient httpClient;
 
@@ -89,7 +88,7 @@ public class NetEaseServiceImpl implements NetEaseService {
      */
     @Override
     public void getSearch(PageHelp pageHelp)  throws Exception{
-      String url="http://music.163.com/api/search/pc";
+        String url="http://music.163.com/api/search/pc";
 //        类型(歌曲：1、专辑：10、歌手：100、歌单：1000、用户：1002、mv：1004)
         final String httpNetEase = this.getHttpNetEase(url+"?s="+pageHelp.getText()+"&offset="+pageHelp.getPageNo()+"&limit="+pageHelp.getPageSize()+"&type=1");
 

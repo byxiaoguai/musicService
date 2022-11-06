@@ -8,7 +8,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.system.vip.common.RedisUtils;
 import org.system.vip.dto.PageHelp;
 import org.system.vip.entity.MiGu.MiGuLyric;
 import org.system.vip.entity.MiGu.MiGuPic;
@@ -34,7 +36,8 @@ public class MiGuServiceImpl implements MiGuService {
 
     @Resource(name = "httpClientFactoryBean")
     private CloseableHttpClient httpClient;
-
+    @Autowired
+    private RedisUtils redisUtils;
 
     /**
      * 咪咕

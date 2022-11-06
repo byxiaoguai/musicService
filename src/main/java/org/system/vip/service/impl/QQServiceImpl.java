@@ -11,8 +11,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.system.vip.common.MusicCode;
+import org.system.vip.common.RedisUtils;
 import org.system.vip.dto.PageHelp;
 import org.system.vip.dto.Play;
 import org.system.vip.dto.Song;
@@ -38,7 +40,8 @@ public class QQServiceImpl implements QQService {
     @Resource(name = "httpClientFactoryBean")
     private CloseableHttpClient httpClient;
 
-
+    @Autowired
+    private RedisUtils redisUtils;
     /**
      * QQ
      * 请求header
@@ -49,7 +52,7 @@ public class QQServiceImpl implements QQService {
         Map<String, String> headers = new HashMap<>();
 
         headers.put("Referer", "http://y.qq.com");
-        headers.put("Cookie", "pgv_pvid=6108826112; fqm_pvqid=e2e6eed8-1b28-4c9c-a32c-e7396a04869f; fqm_sessionid=40321b16-0d58-4a4f-abca-600eb502cd58; pgv_info=ssid=s4397433020; ts_last=y.qq.com/; ts_uid=6613062264; _qpsvr_localtk=0.16629067549285392; RK=FHdNpp3AHX; ptcz=d6e8f3f565c4afcbb3bc8c39256f8f7a24e98b740205ad10e3f13e36b28d5fd4; login_type=1; psrf_access_token_expiresAt=1675259614; qm_keyst=Q_H_L_5jpAUDLqwBQpp3aqDLKoJCqiMe_nMzamDScXw9iB4kTmsIOCjIpKS_A; psrf_qqaccess_token=E742AC63771C08742140504BD170B498; psrf_musickey_createtime=1667483614; psrf_qqopenid=0C6C678CBD44A7F48641D135AD3E3917; psrf_qqrefresh_token=DAA9645A7F04E83B67CD866188DF7731; uin=877059905; tmeLoginType=2; euin=NeSloe4qNKnk; wxunionid=; qqmusic_key=Q_H_L_5jpAUDLqwBQpp3aqDLKoJCqiMe_nMzamDScXw9iB4kTmsIOCjIpKS_A; wxopenid=; qm_keyst=Q_H_L_5jpAUDLqwBQpp3aqDLKoJCqiMe_nMzamDScXw9iB4kTmsIOCjIpKS_A; psrf_qqunionid=4AF1CB565882B8632377891522BDA6D8; wxrefresh_token=");
+        headers.put("Cookie", "_qpsvr_localtk=0.09736380597713379; RK=FHdNpp3AHX; ptcz=5c14b40a26368359eff30983d50188e887cc77a60261db66b53032e82bc12296; tvfe_boss_uuid=8bce243ddc545c77; pgv_info=ssid=s7376973080; pgv_pvid=1575923751; vversion_name=8.2.95; video_omgid=f3e40a759fad437e; _clck=3878074388|1|f6c|0; fqm_sessionid=6bbbdfc0-773c-4432-a1b0-d383eeff9984; fqm_pvqid=fcca50c0-c183-4fdb-8553-32a85e58508c; ts_last=y.qq.com/; ts_uid=1140315804; login_type=1; psrf_qqunionid=4AF1CB565882B8632377891522BDA6D8; tmeLoginType=2; psrf_qqopenid=0C6C678CBD44A7F48641D135AD3E3917; euin=NeSloe4qNKnk; qm_keyst=Q_H_L_5wE-JClpOi21w0qYE0uCkFBwyZNHHrHSf5qr0mSknRy_HwNnbcr8S1A; qqmusic_key=Q_H_L_5wE-JClpOi21w0qYE0uCkFBwyZNHHrHSf5qr0mSknRy_HwNnbcr8S1A; psrf_qqaccess_token=E742AC63771C08742140504BD170B498; wxopenid=; wxrefresh_token=; qm_keyst=Q_H_L_5wE-JClpOi21w0qYE0uCkFBwyZNHHrHSf5qr0mSknRy_HwNnbcr8S1A; psrf_qqrefresh_token=DAA9645A7F04E83B67CD866188DF7731; psrf_musickey_createtime=1667707051; wxunionid=; psrf_access_token_expiresAt=1675483051; uin=877059905; ts_refer=ADTAGmyqq");
         headers.put("User-Agent", "QQ%E9%9F%B3%E4%B9%90/54409 CFNetwork/901.1 Darwin/17.6.0 (x86_64)");
         headers.put("Accept", "*/*");
         headers.put("Accept-Language", "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4");
@@ -406,10 +409,9 @@ public class QQServiceImpl implements QQService {
         params.put("needNewCode", "0");
         params.put("data", JSONObject.toJSONString(qqBean));
         final String s = URLUtil.buildQuery(params, null);
-
-       //data参数
-       // {"comm" : {"_channelid" : "0","_os_version" : "6.2.9200-2","authst" : "","ct" : "19","cv" : "1873","guid" : "0","patch" : "118","psrf_access_token_expiresAt" : 0,"psrf_qqaccess_token" : "","psrf_qqopenid" : "","psrf_qqunionid" : "","tmeAppID" : "qqmusic","tmeLoginType" : 2,"uin" : "0","wid" : "0"},"queryvkey" : {"method" : "UrlGetVkey","module" : "music.vkey.GetVkey","param" : {"checklimit" : 0,"ctx" : 1,"downloadfrom" : 0,"filename" : ["RS01003LnSNo1ecdc3.flac"],"guid" : "0","nettype" : "","referer" : "y.qq.com","scene" : 0,"songmid" : ["002Y0Owp11JozK"],"songtype" : [ 1 ],"uin" : "0"}}}
-       //data参数
+        //data参数
+        // {"comm" : {"_channelid" : "0","_os_version" : "6.2.9200-2","authst" : "","ct" : "19","cv" : "1873","guid" : "0","patch" : "118","psrf_access_token_expiresAt" : 0,"psrf_qqaccess_token" : "","psrf_qqopenid" : "","psrf_qqunionid" : "","tmeAppID" : "qqmusic","tmeLoginType" : 2,"uin" : "0","wid" : "0"},"queryvkey" : {"method" : "UrlGetVkey","module" : "music.vkey.GetVkey","param" : {"checklimit" : 0,"ctx" : 1,"downloadfrom" : 0,"filename" : ["RS01003LnSNo1ecdc3.flac"],"guid" : "0","nettype" : "","referer" : "y.qq.com","scene" : 0,"songmid" : ["002Y0Owp11JozK"],"songtype" : [ 1 ],"uin" : "0"}}}
+        //data参数
         //{"modulevkey":{"method":"CgiGetVkey","module":"vkey.GetVkeyServer","param":{"uin":"0","filename":["F000003oKu203YsfZA.flac"],"guid":"0","songmid":["001qvvgF38HVc4"]}},"comm":{"authst":"0","qq":"0"}}
 
         String url = "https://u6.y.qq.com/cgi-bin/musicu.fcg?" + URLUtil.encode(s);
