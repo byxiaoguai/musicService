@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.system.vip.dto.Play;
 import org.system.vip.entity.MiGu.MiGuSong;
+import org.system.vip.notice.WeiXinTools;
 import org.system.vip.service.MiGuService;
 import org.system.vip.service.QQService;
 import org.system.vip.tools.HttpsTools;
@@ -34,18 +35,27 @@ public class MiGuTask {
     /**
      * 咪咕音乐心跳
      */
+//    @Scheduled(cron = "0 0/10 * * * ?")
+//    @Scheduled(cron = "0/1 * * * * ? ")
     @Scheduled(cron = "0 0/10 * * * ?")
     public void heartbeat() {
         MiGuSong song = miGuService.getSong("60054701912", "1");
+        if (song.getData() == null||song.getData().getPlayUrl()==null) {
+            WeiXinTools.sendMsgText("咪咕cookie需要替换老大！");
+        }
         log.info("咪咕心跳时间:" + DateTime.now().toMsStr() + ":" + song);
     }
 
     /**
      * QQ音乐心跳
      */
+//    @Scheduled(cron = "0/1 * * * * ? ")
     @Scheduled(cron = "0 0/10 * * * ?")
     public void heartbeatQQ() {
         final Play size_flac = qqService.getPlay("0039MnYb0qxYhV", "size_flac");
+        if (size_flac.getUrl().replace("https://aqqmusic.tc.qq.com/amobile.music.tc.qq.com/","").equals("")) {
+            WeiXinTools.sendMsgText("qq音乐cookie需要替换老大！");
+        }
         log.info("QQ心跳时间:" + DateTime.now().toMsStr() + ":" + size_flac);
     }
 
