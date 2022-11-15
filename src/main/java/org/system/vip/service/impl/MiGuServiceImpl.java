@@ -1,6 +1,8 @@
 package org.system.vip.service.impl;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.URLUtil;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import org.apache.http.Consts;
 import org.apache.http.client.methods.HttpGet;
@@ -47,20 +49,23 @@ public class MiGuServiceImpl implements MiGuService {
      */
     private Map<String, String> getHeader() {
         Map<String, String> headers = new HashMap<>();
+        String s = FileUtil.readUtf8String("/data/wwwroot/music.dog886.com/mg.txt");
+        JSONObject jsonObject = JSONUtil.parseObj(s);
+
 
         headers.put("Accept", " application/json, text/plain, */*");
         headers.put("Accept-Encoding", " gzip, deflate, br");
         headers.put("Accept-Language", " zh-CN,zh;q=0.9");
-        headers.put("By", "0a7ffa452096d330934052105a67794a");
+        headers.put("By", jsonObject.getStr("by"));
         headers.put("Connection", " keep-alive");
-        headers.put("Cookie", "migu_cookie_id=b241a219-943e-4d79-a190-0494b7ec0790; mg_uem_user_id_3136357ddb6a49f5b317ca6254e7ea49=7af73072-78f2-42cb-ae8c-a60c96c05d8d; cookieId=jnOuLWwHrmeVQVJxFSld_dJFuWYfeAf1667301248640; idmpauth=true@passport.migu.cn; migu_music_msidn=vbxok1525yy7yxNvy7ycfQ%3D%3D; SESSION=NjI0NGU4YzUtYjhlNi00NTI1LWE4MDItOGI4YzI0NDBlMGE2");
+        headers.put("Cookie", jsonObject.getStr("cookie"));
         headers.put("DNT", " 1");
         headers.put("Host", " m.music.migu.cn");
         headers.put("Referer", " https://m.music.migu.cn/v4/search");
         headers.put("Sec-Fetch-Dest", " empty");
         headers.put("Sec-Fetch-Mode", " cors");
         headers.put("Sec-Fetch-Site", " same-origin");
-        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36 SE 2.X MetaSr 1.0");
+        headers.put("User-Agent", jsonObject.getStr("ua"));
 
         return headers;
     }

@@ -60,6 +60,7 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
             <version>4.5.13</version>
+
         </dependency>
 
         <dependency>
@@ -96,12 +97,14 @@
             <version>3.0.0</version>
         </dependency>
 
-        <!--模板引擎-->
-        <dependency>
-            <groupId>com.ibeetl</groupId>
-            <artifactId>beetl-framework-starter</artifactId>
-            <version>${ibeetl.version}</version>
-        </dependency>
+<!--        &lt;!&ndash;模板引擎&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.ibeetl</groupId>-->
+<!--            <artifactId>beetl-framework-starter</artifactId>-->
+<!--            <version>${ibeetl.version}</version>-->
+<!--        </dependency>-->
+
+
     </dependencies>
 
     <build>
