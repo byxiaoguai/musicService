@@ -410,11 +410,7 @@ public class QQServiceImpl implements QQService {
         params.put("needNewCode", "0");
         params.put("data", JSONObject.toJSONString(qqBean));
         final String s = URLUtil.buildQuery(params, null);
-        //data参数
-        // {"comm" : {"_channelid" : "0","_os_version" : "6.2.9200-2","authst" : "","ct" : "19","cv" : "1873","guid" : "0","patch" : "118","psrf_access_token_expiresAt" : 0,"psrf_qqaccess_token" : "","psrf_qqopenid" : "","psrf_qqunionid" : "","tmeAppID" : "qqmusic","tmeLoginType" : 2,"uin" : "0","wid" : "0"},"queryvkey" : {"method" : "UrlGetVkey","module" : "music.vkey.GetVkey","param" : {"checklimit" : 0,"ctx" : 1,"downloadfrom" : 0,"filename" : ["RS01003LnSNo1ecdc3.flac"],"guid" : "0","nettype" : "","referer" : "y.qq.com","scene" : 0,"songmid" : ["002Y0Owp11JozK"],"songtype" : [ 1 ],"uin" : "0"}}}
-        //data参数
-        //{"modulevkey":{"method":"CgiGetVkey","module":"vkey.GetVkeyServer","param":{"uin":"0","filename":["F000003oKu203YsfZA.flac"],"guid":"0","songmid":["001qvvgF38HVc4"]}},"comm":{"authst":"0","qq":"0"}}
-
+     
         String url = "https://u6.y.qq.com/cgi-bin/musicu.fcg?" + URLUtil.encode(s);
         try {
             final String httpQQ = this.getHttpQQ(url);
