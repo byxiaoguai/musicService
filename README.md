@@ -23,6 +23,7 @@ nohup java -jar vip-0.0.2-SNAPSHOT.jar  > nohup.out 2>&1 &
 stop.sh
 
 里面代码
+
 PID=$(ps -ef | grep vip-0.0.2-SNAPSHOT.jar | grep -v grep | awk '{ print $2 }')
 if [ -z "$PID" ]
 then
