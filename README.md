@@ -20,7 +20,6 @@ linux 环境
 "by":"咪咕音乐网站获取by :hader",
 "cookie":"咪咕cookie",
 "ua":"咪咕请求的ua"
-
 }
 
 ### 命令脚本
