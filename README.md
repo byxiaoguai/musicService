@@ -6,6 +6,23 @@
 QQ音乐
 咪咕音乐
 
+### VIPcookie 设置
+QA:不加这2个东西你咋vip解析音乐了？
+!!!! 2个注意
+
+linux 环境
+
+/opt/qq.txt 创建个文件 里面放qqcookie就好了。
+
+/opt/mg.txt 创建个文件 里面放json
+
+{
+"by":"咪咕音乐网站获取by :hader",
+"cookie":"咪咕cookie",
+"ua":"咪咕请求的ua"
+
+}
+
 ### 命令脚本
 
 ！！！！前提你linux 服务器 系统安装好java JDK JDK JDK 1.8 1.8 1.8
